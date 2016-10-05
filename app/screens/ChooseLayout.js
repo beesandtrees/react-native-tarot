@@ -17,6 +17,8 @@ let wHeight = Dimensions.get('window').height;
 
 import globalStyles from '../helpers/globalStyles.js';
 
+import CloseButton from '../components/CloseButton';
+
 export default class ChooseLayout extends Component {
     constructor(props) {
         super(props);
@@ -68,7 +70,7 @@ export default class ChooseLayout extends Component {
               <View style={[globalStyles.choices, styles.choices]}>
                   <Image style={styles.card} source={require('../images/layouts/Celtic-Cross.png')} />
               </View>
-              <Text style={[globalStyles.xButton, styles.xButton]} onPress={this.GoBack.bind(this)}>&times;</Text>
+              <CloseButton GoBack={() => this.GoBack()} white={true} />
             </View>
         );
     }
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
   },
   heading: {
       marginBottom: 24
-  },  
+  },
   xButton: {
     color: 'white'
   },

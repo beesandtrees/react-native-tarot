@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {
     AppRegistry,
+    AsyncStorage,
     Image,
     Navigator,
     ScrollView,
@@ -17,10 +18,24 @@ let wHeight = Dimensions.get('window').height;
 
 import globalStyles from '../helpers/globalStyles.js';
 import DeckDetails from './DeckDetails';
+import CloseButton from '../components/CloseButton';
+import Checkbox from '../components/Checkbox';
 
 export default class ChooseDeck extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+          defaultSet : false
+        }
+    }
+    componentDidMount() {
+        AsyncStorage.getItem('DefaultDeck').then((value) => {
+            if(value !== null) {
+                this.setState({'defaultSet' : value});
+            } else {
+                this.setState({'defaultSet' : false});
+            }
+        }).done();
     }
     GoBack() {
       this.props.navigator.pop();
@@ -35,6 +50,12 @@ export default class ChooseDeck extends Component {
           }
         });
     }
+    SetAsDefault(deck) {
+        let isSet = !this.state.defaultSet;
+        console.log(isSet);
+        this.setState({'defaultSet' : isSet});
+        AsyncStorage.setItem('DefaultDeck', deck);
+    }
     render() {
         return (
             <View style={[globalStyles.fullView, styles.board]}>
@@ -46,36 +67,11 @@ export default class ChooseDeck extends Component {
                   scrollEventThrottle={200}
                   showsVerticalScrollIndicator={true}
                   style={styles.scrollView}>
-                    <View style={[globalStyles.checkbox]}>
-                        <View style={[globalStyles.check]}></View>
-                        <TouchableHighlight underlayColor="transparent"  style={[globalStyles.label]}>
-                          <View>
-                            <Text style={[globalStyles.whiteText, globalStyles.labelText]}>Rider-Waite - 1910</Text>
-                            <TouchableHighlight style={styles.info} onPress={this.LoadDetails.bind(this)} underlayColor="transparent">
-                                <Image style={styles.infobtn} source={require('../images/misc/info-btn.png')} />
-                            </TouchableHighlight>
-                          </View>
-                        </TouchableHighlight>
-                    </View>
-                    <View style={[globalStyles.checkbox]}>
-                        <View style={[globalStyles.check]}></View>
-                        <TouchableHighlight underlayColor="transparent"  style={[globalStyles.label]}>
-                          <View>
-                            <Text style={[globalStyles.whiteText, globalStyles.labelText]}>Jean Dodal - 1715</Text>
-                            <TouchableHighlight style={styles.info} onPress={this.LoadDetails.bind(this)} underlayColor="transparent">
-                                <Image style={styles.infobtn} source={require('../images/misc/info-btn.png')} />
-                            </TouchableHighlight>
-                          </View>
-                        </TouchableHighlight>
-                    </View>
+                    <Checkbox MainAction={() => this.LoadDetails()} InfoAction={() => this.LoadDetails()} labelText="Rider-Waite - 1910" />
+                    <Checkbox MainAction={() => this.LoadDetails()} InfoAction={() => this.LoadDetails()} labelText="Jean Dodal - 1715" />
                 </ScrollView>
                 <View style={[globalStyles.hr]}></View>
-                <View style={[globalStyles.checkbox]}>
-                    <View style={[globalStyles.check]}></View>
-                    <TouchableHighlight underlayColor="transparent"  style={[globalStyles.label]}>
-                        <Text style={[globalStyles.whiteText, globalStyles.labelText]}>Set as Default</Text>
-                    </TouchableHighlight>
-                </View>
+                <Checkbox MainAction={() => this.SetAsDefault('Rider-Waite')} labelText="Set as Default" reversed={this.state.defaultSet} />
                 <TouchableHighlight style={[globalStyles.button]} underlayColor="transparent">
                     <Text style={[globalStyles.buttonText, styles.choices, globalStyles.buttonIndent]}>Save Selection</Text>
                 </TouchableHighlight>
@@ -83,7 +79,7 @@ export default class ChooseDeck extends Component {
               <View style={[globalStyles.choices, styles.choices]}>
                   <Image style={styles.card} source={require('../images/MajorArcana/Fool.jpg')} />
               </View>
-              <Text style={[globalStyles.xButton, styles.xButton]} onPress={this.GoBack.bind(this)}>&times;</Text>
+              <CloseButton GoBack={() => this.GoBack()} white={true} />
             </View>
         );
     }
@@ -98,20 +94,6 @@ const styles = StyleSheet.create({
   },
   heading: {
       marginBottom: 24
-  },
-  xButton: {
-    color: 'white'
-  },
-  info: {
-    height: 22,
-    position: 'absolute',
-    right: -26,
-    top: 3,
-    width: 22
-  },
-  infobtn: {
-    height: 22,
-    width: 22
   },
   card: {
     height: wHeight*0.9,

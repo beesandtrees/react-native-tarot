@@ -18,8 +18,7 @@ let wWidth = Dimensions.get('window').width;
 let wHeight = Dimensions.get('window').height;
 
 import Card from '../components/Card';
-// import Position from './components/Positions';
-import Controls from '../components/Controls';
+import CloseButton from '../components/CloseButton';
 
 import Cards from '../helpers/cards.json';
 import Layout from '../helpers/layout.json';
@@ -35,7 +34,6 @@ export default class Board extends Component {
         };
     }
     GoBack() {
-      // create function to allow players to continue by dismissing modal
       this.props.navigator.pop();
     }
     fisherYates(array) {
@@ -95,7 +93,7 @@ export default class Board extends Component {
                 <View style={[globalStyles.board, styles.board]}>
                     {this.state.sections}
                 </View>
-                <Text style={[globalStyles.xButton]} onPress={this.GoBack.bind(this)}>&times;</Text>
+                <CloseButton GoBack={() => this.GoBack()} />
             </View>
         );
     }

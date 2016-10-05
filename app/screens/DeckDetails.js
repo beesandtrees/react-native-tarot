@@ -17,6 +17,10 @@ let wHeight = Dimensions.get('window').height;
 
 import globalStyles from '../helpers/globalStyles.js';
 import Images from '../helpers/images.js';
+import Cards from '../helpers/cards.json';
+
+import Card from '../components/Card';
+import CloseButton from '../components/CloseButton';
 
 export default class DeckDetails extends Component {
     constructor(props) {
@@ -30,9 +34,10 @@ export default class DeckDetails extends Component {
     }
     renderImages() {
       var images = [];
-      for (var image in Images[0]) {
+      for (var i = 0; i < Cards.length; i++) {
+        let card = Cards[i];
         images.push(
-            <Image key={image} style={styles.image} source={Images[0][image]} />
+            <Card key={i} index={i} value={card} reversed={false} position={false} navigator={this.props.navigator} />
         );
       }
       return images;
@@ -57,7 +62,7 @@ export default class DeckDetails extends Component {
                     Illustrated by Patricia Coleman Smith in 1910, the Rider-Waite deck is incredibly popular.
                   </Text>
               </View>
-              <Text style={[globalStyles.xButton, styles.xButton]} onPress={this.GoBack.bind(this)}>&times;</Text>
+              <CloseButton GoBack={() => this.GoBack()} white={true} />
             </View>
         );
     }

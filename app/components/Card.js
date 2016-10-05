@@ -21,9 +21,11 @@ import Images from '../helpers/images.js';
 export default class Card extends Component {
   constructor(props) {
     super(props);
+
     let reversed = this.props.reversed === true ? 'reversed ' : '';
     let thisCard = 'card-' + this.props.index;
-    let cardSearch = this.props.value.arcana === 'Major' ? "major" + this.props.value.image : this.props.value.suit + this.props.value.id;
+    let cardSearch = this.props.value.arcana === 'Major' ? "major" +
+    this.props.value.image : this.props.value.suit + this.props.value.id;
 
     this.state = {
       isOpen : false,

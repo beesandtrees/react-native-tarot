@@ -21,11 +21,25 @@ import Board from './Board';
 import ChooseDeck from './ChooseDeck';
 import ChooseLayout from './ChooseLayout';
 
+import Checkbox from '../components/Checkbox';
+
 import globalStyles from '../helpers/globalStyles.js';
 
 export default class Options extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+          reversed : false
+        }
+    }
+    componentDidMount() {
+        AsyncStorage.getItem('IncludeReversed').then((value) => {
+            if(value !== null) {
+                this.setState({'reversed' : value});
+            } else {
+                this.setState({'reversed' : false});
+            }
+        }).done();
     }
     LoadBoard(cards, random) {
         this.props.navigator.push({
@@ -51,6 +65,11 @@ export default class Options extends Component {
           component: HelpView
         });
     }
+    IncludeReversed() {
+      let newReversal = !this.state.reversed;
+      this.setState({'reversed' : newReversal});
+      // AsyncStorage.setItem('IncludeReversed', newReversal);
+    }
     render() {
         return (
             <View style={globalStyles.fullView}>
@@ -67,12 +86,7 @@ export default class Options extends Component {
                 <TouchableHighlight style={[globalStyles.button]} onPress={this.LoadChooseLayout.bind(this)} underlayColor="transparent">
                     <Text style={[globalStyles.buttonText, globalStyles.backgroundRed, globalStyles.buttonIndent]}>Choose a Layout</Text>
                 </TouchableHighlight>
-                <View style={[globalStyles.checkbox]}>
-                    <View style={[globalStyles.check]}></View>
-                    <TouchableHighlight underlayColor="transparent"  style={[globalStyles.label, styles.label]}>
-                        <Text style={[globalStyles.whiteText]}>Include Reversed Cards</Text>
-                    </TouchableHighlight>
-                </View>
+                <Checkbox MainAction={() => this.IncludeReversed()} small={true} labelText="Include Reversed Cards" reversed={this.state.reversed} />
               </View>
               <View style={[globalStyles.choices, globalStyles.backgroundRed]}>
                 <Text style={globalStyles.heading}>Options</Text>

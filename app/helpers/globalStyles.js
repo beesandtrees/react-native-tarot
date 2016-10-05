@@ -49,30 +49,41 @@ export default globalStyles = StyleSheet.create({
         marginLeft: 12
     },
     checkbox: {
-      position: 'relative',
       height: 44,
       marginBottom: 10,
-      width: wWidth*0.6
+      paddingRight: 36,
+      position: 'relative',
+      width: wWidth*0.5
     },
     check: {
       borderColor: 'white',
       borderRadius: 8,
       borderWidth: 2,
       height: 24,
-      overflow: 'hidden',
       position: 'absolute',
-      top: 0,
-      left: 30,
+      top: 3,
+      left: -34,
       width: 24
     },
     label: {
       position: 'absolute',
-      paddingRight: 36,
       top: -2,
       left: 64
     },
     labelText: {
       fontSize: 24,
+    },
+    info: {
+      height: 22,
+      position: 'absolute',
+      right: 36,
+      top: 3,
+      width: 22,
+      zIndex: 99
+    },
+    infobtn: {
+      height: 22,
+      width: 22
     },
     buttons: {
         alignSelf: 'stretch',

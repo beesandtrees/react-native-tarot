@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {
     Animated,
     AppRegistry,
+    AsyncStorage,
     Image,
     Navigator,
     ScrollView,
@@ -21,11 +22,13 @@ import Images from '../helpers/images.js';
 import globalStyles from '../helpers/globalStyles.js';
 
 import CardNote from './Note';
+import CloseButton from '../components/CloseButton';
 
 export default class CardDetail extends Component {
   constructor(props) {
     super(props);
 
+    let name = this.props.value.name.replace(/ /g, "+");
     let cardSearch = this.props.value.arcana === 'Major' ? "major" + this.props.value.image : this.props.value.suit + this.props.value.id;
 
     this.state = {
@@ -36,8 +39,14 @@ export default class CardDetail extends Component {
         secondaryDescription: this.props.reversed === false ? this.props.value.reversed : this.props.value.upright,
         upright: this.props.reversed === true ? 'Reversed' : 'Upright',
         secondaryDirection: this.props.reversed === false ? 'Reversed' : 'Upright',
-        modalVisible: true
+        name: name,
+        mynote: ''
     };
+  }
+  componentDidMount() {
+      AsyncStorage.getItem(this.state.name).then((value) => {
+          this.setState({"mynote": value});
+      }).done();
   }
   LoadNotes() {
       this.props.navigator.push({
@@ -77,13 +86,14 @@ export default class CardDetail extends Component {
                         <Text style={styles.descColor}>{this.state.secondaryDirection}:</Text>
                         <Text style={[styles.descColor, styles.descMargin]}>{this.state.secondaryDescription}</Text>
                         <Text style={styles.descColor}>My Notes:</Text>
+                        <Text style={styles.descColor}>{this.state.mynote}</Text>
                     </ScrollView>
                 </View>
                 <TouchableHighlight style={[globalStyles.button]} onPress={this.LoadNotes.bind(this)} underlayColor="transparent">
                     <Text style={[globalStyles.buttonText, styles.choices, globalStyles.buttonSmall]}>Add a Note</Text>
                 </TouchableHighlight>
             </View>
-            <Text style={[globalStyles.xButton]} onPress={this.GoBack.bind(this)}>&times;</Text>
+            <CloseButton GoBack={() => this.GoBack()} />
         </View>
      );
   }
