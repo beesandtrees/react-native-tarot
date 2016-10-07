@@ -14,7 +14,7 @@ import Dimensions from 'Dimensions';
 let wWidth = Dimensions.get('window').width;
 let wHeight = Dimensions.get('window').height;
 
-import CardDetail from '../screens/CardDetail';
+import CardDetail from '../containers/CardDetail';
 
 import Images from '../helpers/images.js';
 
