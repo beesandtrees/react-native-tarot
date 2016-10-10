@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-    AppRegistry,
     Image,
     StyleSheet,
     Text,
@@ -10,31 +9,53 @@ import {
 
 import globalStyles from '../helpers/globalStyles.js';
 
-// need to be able to set checked/ unchecked prop on these
-
 export default class Checkbox extends Component {
   constructor(props) {
       super(props);
+
       this.state = {
           styles : [globalStyles.whiteText, globalStyles.labelText],
-          checkStyles : []
+          checkStyles : [],
+          checkedStyles : [globalStyles.check]
       }
       if(this.props.small) {
           this.state.styles.push(styles.smallLabel);
       }
+
+      switch(this.props.color) {
+        case 'red':
+          this.state.checkedStyles.push(styles.red)
+          break;
+        case 'green':
+          this.state.checkedStyles.push(styles.green)
+          break;
+        case 'purple':
+          this.state.checkedStyles.push(styles.purple)
+          break;
+        case 'blue':
+          this.state.checkedStyles.push(styles.blue)
+          break;
+        case 'yellow':
+          this.state.checkedStyles.push(styles.yellow)
+          break;
+        default:
+          this.state.checkedStyles.push(styles.checked)
+          break;
+      }
   }
   render() {
-    if(this.props.reversed === true) {
-        this.state.checkStyles = [globalStyles.check, styles.checked];
+    if(this.props.checked === true) {
+        this.state.checkStyles = this.state.checkedStyles
     } else {
-        this.state.checkStyles = [globalStyles.check];
+        this.state.checkStyles = [globalStyles.check]
     }
+
     if(this.props.InfoAction) {
       return (
         <View style={[globalStyles.checkbox]}>
             <TouchableHighlight underlayColor="transparent" onPress={this.props.MainAction} style={[globalStyles.label]}>
               <View>
-                <View style={[globalStyles.check]}></View>
+                <View style={this.state.checkStyles}></View>
                 <Text style={this.state.styles}>{this.props.labelText}</Text>
               </View>
             </TouchableHighlight>
@@ -64,6 +85,22 @@ const styles = StyleSheet.create({
     marginTop: 4
   },
   checked : {
-    backgroundColor: 'rgba(255,255,255,0.4)'
+    backgroundColor: 'rgba(255,255,255,0.5)'
+  },
+  red : {
+    backgroundColor: '#D52B08'
+  },
+  green : {
+    backgroundColor: '#737822'
+  },
+  blue : {
+    backgroundColor: '#356D83'
+  },
+  purple: {
+    backgroundColor: '#73436E'
+  },
+  yellow: {
+    backgroundColor: '#B99A10'
   }
+
 });

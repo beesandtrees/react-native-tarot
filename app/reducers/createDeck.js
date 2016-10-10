@@ -1,8 +1,10 @@
 import * as types from '../actions/actionTypes';
 
+// TODO -- create initial state from asyncStorage!
+
 const initialState = {
-  deck: 'rider',
-  layout: 'basic',
+  deck: 'Rider-Waite',
+  layout: 'Basic',
   reversed: false
 };
 
@@ -22,6 +24,13 @@ export default function createDeck(state = initialState, action = {}) {
     case types.REVERSED:
       return {
         ...state,
+        reversed: action.tf
+      };
+    case types.TODAY:
+      return {
+        ...state,
+        deck: 'Rider-Waite',
+        layout: 'Single',
         reversed: true
       };
     default:

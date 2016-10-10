@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
 import {
-    Animated,
-    AppRegistry,
     AsyncStorage,
     Image,
     Navigator,
@@ -22,19 +20,17 @@ import Images from '../helpers/images.js';
 import globalStyles from '../helpers/globalStyles.js';
 
 import CardNote from './Note';
-import CloseButton from '../components/CloseButton';
+
+import CardImage from '../subcomponents/CardImage';
+import CloseButton from '../subcomponents/CloseButton';
 
 export default class CardDetail extends Component {
   constructor(props) {
     super(props);
 
     let name = this.props.value.name.replace(/ /g, "+");
-    let cardSearch = this.props.value.arcana === 'Major' ? "major" + this.props.value.image : this.props.value.suit + this.props.value.id;
 
     this.state = {
-        image : this.props.value.arcana === 'Minor' ? Images[0][cardSearch] :
-        Images[0][cardSearch],
-        cardStyles : [styles.image],
         description: this.props.reversed === true ? this.props.value.reversed : this.props.value.upright,
         secondaryDescription: this.props.reversed === false ? this.props.value.reversed : this.props.value.upright,
         upright: this.props.reversed === true ? 'Reversed' : 'Upright',
@@ -52,9 +48,7 @@ export default class CardDetail extends Component {
       this.props.navigator.push({
         component: CardNote,
         passProps: {
-          value: this.props.value,
-          reversed : this.props.reversed,
-          position: this.props.position
+          value: this.props.value
         }
       });
   }
@@ -67,7 +61,7 @@ export default class CardDetail extends Component {
             <StatusBar hidden={true} />
             <View style={[globalStyles.choices, styles.choices]}>
                 <View style={styles.imageHolder}>
-                    <Image style={styles.card} source={this.state.image} />
+                    <CardImage deck={this.props.deck} reversed={this.props.reversed} value={this.props.value} size='large' />
                 </View>
             </View>
             <View style={[globalStyles.board, styles.board]}>
@@ -116,15 +110,9 @@ const styles = StyleSheet.create({
     },
     subHeading: {
       color: '#4D4A4F',
-      fontSize: 18,
+      fontSize: 16,
       fontWeight: '500',
       marginBottom: 10
-    },
-    card: {
-      borderRadius: 6,
-      height: ((wHeight/360)-0.15)*360,
-      margin: 3,
-      width: (((wWidth*0.27)/210))*210
     },
     imageHolder: {
       backgroundColor: 'white',

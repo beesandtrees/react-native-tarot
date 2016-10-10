@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
 import {
-    Animated,
-    AppRegistry,
     AsyncStorage,
     Image,
     Navigator,
@@ -21,20 +19,8 @@ let wHeight = Dimensions.get('window').height;
 import Images from '../helpers/images.js';
 import globalStyles from '../helpers/globalStyles.js';
 
-import CloseButton from '../components/CloseButton';
-
-class NoteTextInput extends Component {
-  render() {
-    return (
-      <TextInput
-        style={styles.textInput}
-        placeholder="Add your note here..."
-        multiline={true}
-        numberOfLines={6}
-      />
-    );
-  }
-}
+import CardImage from '../subcomponents/CardImage';
+import CloseButton from '../subcomponents/CloseButton';
 
 export default class CardNote extends Component {
   constructor(props) {
@@ -73,7 +59,7 @@ export default class CardNote extends Component {
             <StatusBar hidden={true} />
             <View style={[globalStyles.choices, styles.choices]}>
                 <View style={styles.imageHolder}>
-                    <Image style={styles.card} source={this.state.image} />
+                    <CardImage deck={this.props.deck} reversed={false} value={this.props.value} size='large' />
                 </View>
             </View>
             <View style={[globalStyles.board, styles.board]}>

@@ -57,7 +57,7 @@ export default globalStyles = StyleSheet.create({
     },
     check: {
       borderColor: 'white',
-      borderRadius: 8,
+      borderRadius: 16,
       borderWidth: 2,
       height: 24,
       position: 'absolute',
