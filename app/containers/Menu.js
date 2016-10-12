@@ -7,7 +7,7 @@ import { StatusBar, View } from 'react-native';
 
 import MenuItems from '../components/MenuItems';
 
-class Options extends Component {
+class Menu extends Component {
     constructor(props) {
         super(props);
     }
@@ -25,4 +25,4 @@ class Options extends Component {
 
 export default connect(state => ({state: state.createDeck}), (dispatch) => ({
     actions: bindActionCreators(deckActions, dispatch)
-}))(Options);
+}))(Menu);

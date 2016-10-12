@@ -15,7 +15,6 @@ export default class Checkbox extends Component {
 
       this.state = {
           styles : [globalStyles.whiteText, globalStyles.labelText],
-          checkStyles : [],
           checkedStyles : [globalStyles.check]
       }
       if(this.props.small) {
@@ -39,13 +38,13 @@ export default class Checkbox extends Component {
           this.state.checkedStyles.push(styles.yellow)
           break;
         default:
-          this.state.checkedStyles.push(styles.checked)
+          this.state.checkedStyles.push(styles.red)
           break;
       }
   }
   render() {
     if(this.props.checked === true) {
-        this.state.checkStyles = this.state.checkedStyles
+        this.state.checkStyles = this.state.checkedStyles;
     } else {
         this.state.checkStyles = [globalStyles.check]
     }
@@ -83,9 +82,6 @@ const styles = StyleSheet.create({
   smallLabel: {
     fontSize: 18,
     marginTop: 4
-  },
-  checked : {
-    backgroundColor: 'rgba(255,255,255,0.5)'
   },
   red : {
     backgroundColor: '#D52B08'

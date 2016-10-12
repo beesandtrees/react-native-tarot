@@ -42,6 +42,12 @@ export default class Card extends Component {
     if(this.props.size === 'large') {
         this.state.cardStyles.push(styles.imageLG)
     }
+    if(this.props.layout === 'Past-Present-Future') {
+        this.state.cardStyles.push(styles.imageMD)
+    }
+    if(this.props.layout === 'Celtic-Cross') {
+        this.state.cardStyles.push([styles.imageSM, styles.imageAbsolute])
+    }
   }
   render() {
     return (
@@ -60,6 +66,18 @@ const styles = StyleSheet.create({
       marginRight: 0,
       width: (wWidth*0.75)*0.17
   },
+  imageSM: {
+    borderRadius: 3,
+    height: 100,
+    width: 52
+  },
+  imageMD: {
+    borderRadius: 6,
+    height: (wWidth*0.22)*1.8,
+    marginTop: 20,
+    marginRight: 20,
+    width: (wWidth*0.22)
+  },
   imageLG: {
       borderRadius: 6,
       height: ((wHeight/360)-0.15)*360,
@@ -68,5 +86,10 @@ const styles = StyleSheet.create({
   },
   imageReverse: {
       transform: [{ rotate: '180deg'}]
+  },
+  imageAbsolute: {
+    left: 0,
+    position: 'absolute',
+    top: 0
   }
 });

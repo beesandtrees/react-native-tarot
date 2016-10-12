@@ -9,7 +9,6 @@ let wHeight = Dimensions.get('window').height;
 
 export default globalStyles = StyleSheet.create({
     fullView: {
-       backgroundColor: '#EB6B51',
        flex: 1,
        flexDirection: 'row',
        height: wHeight,
@@ -35,7 +34,7 @@ export default globalStyles = StyleSheet.create({
         color: 'white',
         fontSize: 36,
         fontWeight: '300',
-        marginBottom: 16
+        marginBottom: 24
     },
     subHeading: {
         fontSize: 20,
@@ -53,7 +52,7 @@ export default globalStyles = StyleSheet.create({
       marginBottom: 10,
       paddingRight: 36,
       position: 'relative',
-      width: wWidth*0.5
+      width: wWidth*0.55
     },
     check: {
       borderColor: 'white',
@@ -62,13 +61,14 @@ export default globalStyles = StyleSheet.create({
       height: 24,
       position: 'absolute',
       top: 3,
-      left: -34,
+      left: -36,
       width: 24
     },
     label: {
+      paddingLeft: 36,
       position: 'absolute',
       top: -2,
-      left: 64
+      left: 30
     },
     labelText: {
       fontSize: 24,
@@ -76,7 +76,7 @@ export default globalStyles = StyleSheet.create({
     info: {
       height: 22,
       position: 'absolute',
-      right: 36,
+      right: 72,
       top: 3,
       width: 22,
       zIndex: 99
@@ -87,12 +87,6 @@ export default globalStyles = StyleSheet.create({
     },
     buttons: {
         alignSelf: 'stretch',
-    },
-    backgroundRed: {
-        backgroundColor: '#D52B08',
-    },
-    button3: {
-        backgroundColor: '#737822',
     },
     buttonText: {
         alignSelf: 'stretch',

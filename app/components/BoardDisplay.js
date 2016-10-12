@@ -11,6 +11,7 @@ import Dimensions from 'Dimensions';
 let wWidth = Dimensions.get('window').width;
 let wHeight = Dimensions.get('window').height;
 
+import Button from '../subcomponents/Button';
 import Card from '../subcomponents/Card';
 import CloseButton from '../subcomponents/CloseButton';
 
@@ -19,12 +20,34 @@ import Layout from '../helpers/layout.json';
 
 import globalStyles from '../helpers/globalStyles.js';
 
+class BoardLayout extends Component {
+  render() {
+    if(this.props.layout === "Celtic-Cross") {
+      return(
+        <View>
+          <Text style={styles.rightText}>Click cards to see details</Text>
+          <View style={styles.boardRelative}>
+              {this.props.cards}
+          </View>
+        </View>
+      )
+    } else {
+      return(
+        <View style={styles.boardBasic}>
+            <Text style={styles.bottomText}>Click cards to see details</Text>
+            {this.props.cards}
+        </View>
+      )
+    }
+  }
+}
+
 export default class Board extends Component {
     constructor(props) {
         super(props);
 
         var cardLength,
-            reversed = this.props.reversed ? 0.4 : 0;
+            reversed = this.props.reversed ? 0.1 : 0;
 
         switch(this.props.layout) {
           case 'Basic':
@@ -45,12 +68,8 @@ export default class Board extends Component {
 
         this.state = {
             sections: this.dealCards(cardLength, reversed, this.props.deck),
-            boardLayout: [styles.boardBasic]
+            orientation: 'landscape'
         };
-
-        if(this.props.layout === 'Celtic-Cross') {
-            this.state.boardLayout.push(styles.boardRelative)
-        }
     }
     GoBack() {
       this.props.navigator.pop();
@@ -110,10 +129,7 @@ export default class Board extends Component {
         return (
             <View style={[globalStyles.fullView, styles.fullView]}>
                 <StatusBar hidden={true} />
-                <Text style={styles.topText}>Click cards to see details</Text>
-                <View style={this.state.boardLayout}>
-                    {this.state.sections}
-                </View>
+                <BoardLayout layout={this.props.layout} cards={this.state.sections} />
                 <CloseButton GoBack={() => this.GoBack()} />
             </View>
         );
@@ -134,11 +150,22 @@ const styles = StyleSheet.create({
       width: wWidth*0.8
   },
   boardRelative: {
+      height: wHeight-30,
+      marginLeft: 15,
+      marginTop: 30,
+      width: wWidth*0.8,
       position: 'relative'
   },
-  topText: {
+  bottomText: {
+    fontSize: 12,
+    position: 'absolute',
+    bottom: -15,
+    left: 10
+  },
+  rightText: {
+    fontSize: 12,
     position: 'absolute',
     top: 10,
-    left: 30
+    right: -40
   }
 });

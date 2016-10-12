@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 
 import * as reducers from './app/reducers';
-import Options from './app/containers/Options.js';
+import Menu from './app/containers/Menu.js';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const reducer = combineReducers(reducers);
@@ -16,8 +16,8 @@ export default class MainView extends Component {
         return (
             <Provider store={store}>
                 <Navigator initialRoute={{
-                    name: 'Options',
-                    component: Options
+                    name: 'Menu',
+                    component: Menu
                 }} configureScene={() => {
                     return Navigator.SceneConfigs.HorizontalSwipeJump;
                 }} renderScene={(route, navigator) => {

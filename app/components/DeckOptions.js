@@ -17,6 +17,8 @@ let wHeight = Dimensions.get('window').height;
 
 import globalStyles from '../helpers/globalStyles.js';
 import DeckDetails from '../containers/DeckDetails';
+
+import Button from '../subcomponents/Button';
 import CloseButton from '../subcomponents/CloseButton';
 import Checkbox from '../subcomponents/Checkbox';
 
@@ -81,14 +83,12 @@ export default class ChooseDeck extends Component {
                   scrollEventThrottle={200}
                   showsVerticalScrollIndicator={true}
                   style={styles.scrollView}>
-                    <Checkbox MainAction={this.props.chooseDeck.bind(null, 'Rider-Waite')} InfoAction={this.LoadDetails.bind(this,'Rider-Waite')} labelText="Rider-Waite - 1910" checked={this.props.deck === 'Rider-Waite'} color="purple" />
-                    <Checkbox MainAction={this.props.chooseDeck.bind(null, 'Jean-Dodal')} InfoAction={this.LoadDetails.bind(this, 'Jean-Dodal')} labelText="Jean Dodal - 1715" checked={this.props.deck === 'Jean-Dodal'} color="purple" />
+                    <Checkbox MainAction={this.props.chooseDeck.bind(null, 'Rider-Waite')} InfoAction={this.LoadDetails.bind(this,'Rider-Waite')} labelText="Rider-Waite - 1910" checked={this.props.deck === 'Rider-Waite'} />
+                    <Checkbox MainAction={this.props.chooseDeck.bind(null, 'Jean-Dodal')} InfoAction={this.LoadDetails.bind(this, 'Jean-Dodal')} labelText="Jean Dodal - 1715" checked={this.props.deck === 'Jean-Dodal'} />
                 </ScrollView>
                 <View style={[globalStyles.hr]}></View>
-                <Checkbox MainAction={() => this.SetAsDefault('Rider-Waite')} labelText="Set as Default" checked={this.state.defaultSet} color="blue" />
-                <TouchableHighlight style={[globalStyles.button]} underlayColor="transparent" onPress={() => this.GoBack()}>
-                    <Text style={[globalStyles.buttonText, styles.choices, globalStyles.buttonIndent]}>Save Selection</Text>
-                </TouchableHighlight>
+                <Checkbox MainAction={() => this.SetAsDefault('Rider-Waite')} labelText="Set as Default" checked={this.state.defaultSet} />
+                <Button press={() => this.GoBack()} buttonText="Save Selection" />
               </View>
               <DeckCard deck={this.props.deck} />
               <CloseButton GoBack={() => this.GoBack()} white={true} />
@@ -99,10 +99,10 @@ export default class ChooseDeck extends Component {
 
 const styles = StyleSheet.create({
   board: {
-      backgroundColor: '#C391BE',
+      backgroundColor: '#EB6B51',
   },
   choices: {
-    backgroundColor: '#73436E',
+    backgroundColor: '#D52B08',
   },
   heading: {
       marginBottom: 24

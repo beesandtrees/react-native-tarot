@@ -16,6 +16,7 @@ let wHeight = Dimensions.get('window').height;
 
 import globalStyles from '../helpers/globalStyles.js';
 
+import Button from '../subcomponents/Button';
 import CloseButton from '../subcomponents/CloseButton';
 import Checkbox from '../subcomponents/Checkbox';
 
@@ -87,10 +88,8 @@ export default class LayoutOptions extends Component {
                     <Checkbox MainAction={this.props.chooseLayout.bind(null, 'Single')} labelText="Single Card" checked={this.props.layout === 'Single'} color="blue" />
                 </ScrollView>
                 <View style={[globalStyles.hr]}></View>
-                <Checkbox MainAction={() => this.SetAsDefault('Basic')} labelText="Set as Default" checked={this.state.defaultSet} color="purple" />
-                <TouchableHighlight style={[globalStyles.button]} underlayColor="transparent" onPress={() => this.GoBack()}>
-                    <Text style={[globalStyles.buttonText, styles.choices, globalStyles.buttonIndent]}>Save Selection</Text>
-                </TouchableHighlight>
+                <Checkbox MainAction={() => this.SetAsDefault('Basic')} labelText="Set as Default" checked={this.state.defaultSet} color="blue" />
+                <Button press={() => this.GoBack()} buttonText="Save Selection" color="blue" />
               </View>
               <LayoutView layout={this.props.layout} />
               <CloseButton GoBack={() => this.GoBack()} white={true} />

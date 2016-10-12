@@ -15,11 +15,14 @@ let wWidth = Dimensions.get('window').width;
 let wHeight = Dimensions.get('window').height;
 
 import Board from '../containers/Board';
+import CardDetail from '../containers/CardDetail';
 import ChooseDeck from '../containers/ChooseDeck';
 import ChooseLayout from '../containers/ChooseLayout';
 
+import Button from '../subcomponents/Button';
 import Checkbox from '../subcomponents/Checkbox';
 
+import Cards from '../helpers/cards.json';
 import globalStyles from '../helpers/globalStyles.js';
 
 export default class MenuItems extends Component {
@@ -38,13 +41,31 @@ export default class MenuItems extends Component {
             }
         }).done();
     }
+    getValue() {
+        var card = Cards.splice(Math.floor(Math.random() * Cards.length), 1)[0];
+        return card;
+    }
     LoadBoard(today) {
-        if(today) {
-          this.props.todaysCard();
+        if(today || this.props.layout === "Single") {
+          if(today) {
+            this.props.todaysCard();
+          }
+
+          var reversed = Math.random() < 0.1 ? true : false;
+
+          this.props.navigator.push({
+            component: CardDetail,
+            passProps: {
+              deck: this.props.deck,
+              value: this.getValue(),
+              reversed : reversed
+            }
+          });
+        } else {
+          this.props.navigator.push({
+              component: Board
+          });
         }
-        this.props.navigator.push({
-            component: Board
-        });
     }
     LoadChooseDeck() {
         this.props.navigator.push({component: ChooseDeck});
@@ -61,23 +82,17 @@ export default class MenuItems extends Component {
         let possible = reversed ? 'Possible' : 'None'
 
         return (
-            <View style={globalStyles.fullView}>
+            <View style={[globalStyles.fullView, styles.board]}>
                 <StatusBar hidden={true}/>
-                <View style={globalStyles.board}>
+                <View style={[globalStyles.board, styles.board]}>
                     <Text style={globalStyles.heading}>Today&#39;s Reading</Text>
-                    <TouchableHighlight style={[globalStyles.button]} onPress={() => this.LoadBoard(true)} underlayColor="transparent">
-                        <Text style={[globalStyles.buttonText, globalStyles.backgroundRed, globalStyles.buttonIndent]}>Today&#39;s Card</Text>
-                    </TouchableHighlight>
+                    <Button press={() => this.LoadBoard(true)} buttonText="Today&#39;s Card" color="purple" />
                     <View style={[globalStyles.hr]}></View>
-                    <TouchableHighlight style={[globalStyles.button]} onPress={this.LoadChooseDeck.bind(this)} underlayColor="transparent">
-                        <Text style={[globalStyles.buttonText, globalStyles.backgroundRed, globalStyles.buttonIndent]}>Choose a Deck</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={[globalStyles.button]} onPress={this.LoadChooseLayout.bind(this)} underlayColor="transparent">
-                        <Text style={[globalStyles.buttonText, globalStyles.backgroundRed, globalStyles.buttonIndent]}>Choose a Layout</Text>
-                    </TouchableHighlight>
-                    <Checkbox MainAction={this.props.switchReversed.bind(null, !reversed)} small={true} labelText="Include Reversed Cards" color='red' checked={reversed} />
+                    <Button press={() => this.LoadChooseDeck()} buttonText="Choose a Deck" color="purple" />
+                    <Button press={() => this.LoadChooseLayout()} buttonText="Choose a Layout" color="purple" />
+                    <Checkbox MainAction={this.props.switchReversed.bind(null, !reversed)} small={true} labelText="Include Reversed Cards" color="purple" checked={reversed} />
                 </View>
-                <View style={[globalStyles.choices, globalStyles.backgroundRed]}>
+                <View style={[globalStyles.choices, styles.choices]}>
                     <Text style={globalStyles.heading}>Options</Text>
                     <Text style={[globalStyles.whiteText, globalStyles.subHeading]}>Deck</Text>
                     <Text style={[globalStyles.whiteText, globalStyles.choiceText]}>{deck}</Text>
@@ -85,9 +100,7 @@ export default class MenuItems extends Component {
                     <Text style={[globalStyles.whiteText, globalStyles.choiceText]}>{layout}</Text>
                     <Text style={[globalStyles.whiteText, globalStyles.subHeading]}>Reversed Cards?</Text>
                     <Text style={[globalStyles.whiteText, globalStyles.choiceText]}>{possible}</Text>
-                    <TouchableHighlight style={[globalStyles.button]} onPress={() => this.LoadBoard()} underlayColor="transparent">
-                        <Text style={[globalStyles.buttonText, globalStyles.backgroundRed, globalStyles.buttonChoices]}>Begin Reading</Text>
-                    </TouchableHighlight>
+                    <Button press={() => this.LoadBoard()} buttonText="Begin Reading" smaller={true} color="purple" />
                 </View>
             </View>
         );
@@ -95,6 +108,12 @@ export default class MenuItems extends Component {
 }
 
 const styles = StyleSheet.create({
+    board: {
+      backgroundColor: '#AB76A4',
+    },
+    choices: {
+      backgroundColor: '#73436E',
+    },
     label: {
         top: 3
     }
