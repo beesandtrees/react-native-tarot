@@ -24,9 +24,9 @@ class BoardLayout extends Component {
   render() {
     if(this.props.layout === "Celtic-Cross") {
       return(
-        <View>
-          <Text style={styles.rightText}>Click cards to see details</Text>
-          <View style={styles.boardRelative}>
+        <View style={styles.boardRelative}>
+          <Text style={styles.rightText}>Tap card to see face. Tap again to see details.</Text>
+          <View>
               {this.props.cards}
           </View>
         </View>
@@ -34,7 +34,7 @@ class BoardLayout extends Component {
     } else {
       return(
         <View style={styles.boardBasic}>
-            <Text style={styles.bottomText}>Click cards to see details</Text>
+            <Text style={styles.bottomText}>Tap card to see face. Tap again to see details.</Text>
             {this.props.cards}
         </View>
       )
@@ -55,6 +55,12 @@ export default class Board extends Component {
             break;
           case 'Celtic-Cross':
             cardLength = 10;
+            break;
+          case '5card':
+            cardLength = 5;
+            break;
+          case '4card':
+            cardLength = 4;
             break;
           case 'Past-Present-Future':
             cardLength = 3;
@@ -120,7 +126,7 @@ export default class Board extends Component {
                 position = Layout[layout][i];
 
             sections.push(
-                <Card key={i} index={i} key={name} value={card} reversed={reversed} position={position} layout={this.props.layout} deck={deck} navigator={this.props.navigator} />
+                <Card key={i} index={i} key={name} value={card} reversed={reversed} position={position} layout={this.props.layout} deck={deck} navigator={this.props.navigator} flipped={true} />
             );
         }
         return sections
@@ -150,11 +156,12 @@ const styles = StyleSheet.create({
       width: wWidth*0.8
   },
   boardRelative: {
-      height: wHeight-30,
-      marginLeft: 15,
-      marginTop: 30,
-      width: wWidth*0.8,
-      position: 'relative'
+      flex: 1,
+      height:  wWidth*0.9,
+      marginRight: 30,
+      marginTop: 10,
+      transform: [{ rotate: '90deg'}],
+      width: wHeight,
   },
   bottomText: {
     fontSize: 12,
@@ -166,6 +173,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     position: 'absolute',
     top: 10,
-    right: -40
+    left: 40
   }
 });

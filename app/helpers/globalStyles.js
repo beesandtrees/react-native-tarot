@@ -16,11 +16,13 @@ export default globalStyles = StyleSheet.create({
        width: wWidth
     },
     board: {
-        alignItems: 'flex-start',
+        alignItems: 'center',
+        justifyContent: 'center',
         alignSelf: 'flex-start',
         flex: -1,
         marginRight: wWidth*0.025,
         padding: 20,
+        paddingTop: 10,
         width: wWidth*0.6
     },
     choices: {
@@ -28,6 +30,7 @@ export default globalStyles = StyleSheet.create({
         flex: -1,
         height: wHeight,
         padding: 20,
+        paddingTop: 10,
         width: wWidth*0.4
     },
     heading: {
@@ -49,41 +52,38 @@ export default globalStyles = StyleSheet.create({
     },
     checkbox: {
       height: 44,
-      marginBottom: 10,
+      marginTop: 10,
       paddingRight: 36,
-      position: 'relative',
-      width: wWidth*0.55
+      width: wWidth*0.99
+    },
+    label: {
+      flexWrap: 'wrap',
+      alignItems: 'flex-start',
+      flexDirection:'row',
+      paddingLeft: 30,
+      width: wWidth*0.6
+    },
+    labelText: {
+      marginLeft: 10,
+      position: "relative",
+      top: -2
     },
     check: {
       borderColor: 'white',
-      borderRadius: 16,
+      borderRadius: 12,
       borderWidth: 2,
       height: 24,
-      position: 'absolute',
-      top: 3,
-      left: -36,
+      overflow: 'hidden',
       width: 24
     },
-    label: {
-      paddingLeft: 36,
-      position: 'absolute',
-      top: -2,
-      left: 30
-    },
-    labelText: {
-      fontSize: 24,
-    },
     info: {
-      height: 22,
-      position: 'absolute',
-      right: 72,
-      top: 3,
-      width: 22,
-      zIndex: 99
+      marginLeft: 20,
+      height: 30,
+      width: 30
     },
     infobtn: {
-      height: 22,
-      width: 22
+      height: 30,
+      width: 30
     },
     buttons: {
         alignSelf: 'stretch',
@@ -95,7 +95,7 @@ export default globalStyles = StyleSheet.create({
         borderWidth: 2,
         color: '#ffffff',
         flex: 1,
-        fontSize: 24,
+        fontSize: 18,
         marginBottom: 20,
         overflow: 'hidden',
         padding: 6,
@@ -107,7 +107,7 @@ export default globalStyles = StyleSheet.create({
       width: (wWidth*0.4)*0.8
     },
     buttonIndent: {
-      marginLeft: 30,
+      marginLeft: 24,
     },
     buttonSmall: {
       alignSelf: 'flex-end',

@@ -32,15 +32,6 @@ export default class MenuItems extends Component {
             reversed: false
         }
     }
-    componentDidMount() {
-        AsyncStorage.getItem('IncludeReversed').then((value) => {
-            if (value !== null) {
-                this.setState({'reversed': value});
-            } else {
-                this.setState({'reversed': false});
-            }
-        }).done();
-    }
     getValue() {
         var card = Cards.splice(Math.floor(Math.random() * Cards.length), 1)[0];
         return card;
@@ -79,25 +70,61 @@ export default class MenuItems extends Component {
     render() {
         const { deck, layout, reversed } = this.props;
 
-        let possible = reversed ? 'Possible' : 'None'
+        let possible = reversed ? 'Possible' : 'None';
+
+        var spread = "Basic";
+        var deckClean = "Rider Waite";
+
+        switch(this.props.deck) {
+          case 'Rider-Waite':
+            deckClean = "Waite-Colman Smith";
+            break;
+          case 'Jean-Dodal':
+            deckClean = "Jean Dodal";
+            break;
+          default:
+            deckClean = "Waite-Colman Smith";
+        }
+
+        switch(this.props.layout) {
+          case 'Celtic-Cross':
+            spread = "Celtic Cross";
+            break;
+          case '5card':
+            spread = "5 Card";
+            break;
+          case '4card':
+            spread = "4 Card";
+            break;
+          case 'Past-Present-Future':
+            spread = "Past Present Future";
+            break;
+          case 'Single':
+            spread = "Single";
+            break;
+          default:
+            spread = "Past Present Future";
+        }
 
         return (
             <View style={[globalStyles.fullView, styles.board]}>
                 <StatusBar hidden={true}/>
                 <View style={[globalStyles.board, styles.board]}>
-                    <Text style={globalStyles.heading}>Today&#39;s Reading</Text>
-                    <Button press={() => this.LoadBoard(true)} buttonText="Today&#39;s Card" color="purple" />
+                    <Text style={globalStyles.heading}>Create a Reading</Text>
+                    <Button press={() => this.LoadBoard(true)} buttonText="Draw a Card" color="purple" />
                     <View style={[globalStyles.hr]}></View>
                     <Button press={() => this.LoadChooseDeck()} buttonText="Choose a Deck" color="purple" />
-                    <Button press={() => this.LoadChooseLayout()} buttonText="Choose a Layout" color="purple" />
-                    <Checkbox MainAction={this.props.switchReversed.bind(null, !reversed)} small={true} labelText="Include Reversed Cards" color="purple" checked={reversed} />
+                    <Button press={() => this.LoadChooseLayout()} buttonText="Choose a Spread" color="purple" />
+                    <View style={globalStyles.buttonIndent}>
+                      <Checkbox MainAction={this.props.switchReversed.bind(null, !reversed)} small={true} labelText="Include Reversed Cards" color="purple" checked={reversed} />
+                    </View>
                 </View>
                 <View style={[globalStyles.choices, styles.choices]}>
                     <Text style={globalStyles.heading}>Options</Text>
                     <Text style={[globalStyles.whiteText, globalStyles.subHeading]}>Deck</Text>
-                    <Text style={[globalStyles.whiteText, globalStyles.choiceText]}>{deck}</Text>
+                    <Text style={[globalStyles.whiteText, globalStyles.choiceText]}>{deckClean}</Text>
                     <Text style={[globalStyles.whiteText, globalStyles.subHeading]}>Layout</Text>
-                    <Text style={[globalStyles.whiteText, globalStyles.choiceText]}>{layout}</Text>
+                    <Text style={[globalStyles.whiteText, globalStyles.choiceText]}>{spread}</Text>
                     <Text style={[globalStyles.whiteText, globalStyles.subHeading]}>Reversed Cards?</Text>
                     <Text style={[globalStyles.whiteText, globalStyles.choiceText]}>{possible}</Text>
                     <Button press={() => this.LoadBoard()} buttonText="Begin Reading" smaller={true} color="purple" />

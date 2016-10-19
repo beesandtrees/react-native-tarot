@@ -33,8 +33,6 @@ export default class Button extends Component {
 
         if(this.props.smaller) {
             this.state.styles.push(globalStyles.buttonChoices)
-        } else {
-            this.state.styles.push(globalStyles.buttonIndent);
         }
     }
     render() {

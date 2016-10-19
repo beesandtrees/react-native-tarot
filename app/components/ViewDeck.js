@@ -38,13 +38,27 @@ export default class ViewDeck extends Component {
         }
 
         this.state = {
-            images: this.renderImages(this.props.myDeck),
+            images: this.renderPlaceholders(),
             deckName : deckName,
             deckDescription: deckDescription
         };
     }
+    componentDidMount() {
+      setTimeout(function() {
+          this.setState({"images": this.renderImages(this.props.myDeck)});
+      }.bind(this), 500);
+    }
     GoBack() {
       this.props.navigator.pop();
+    }
+    renderPlaceholders() {
+      var images = [];
+      for (var i = 0; i < 12; i++) {
+        images.push(
+          <Image key={i} source={require('../images/misc/Rider-Waite-Back.png')} style={styles.image} />
+        );
+      }
+      return images;
     }
     renderImages(currentDeck) {
       var images = [];
@@ -92,13 +106,23 @@ const styles = StyleSheet.create({
   heading: {
       marginBottom: 24
   },
-  scrollView: {
-    height: wHeight*0.9,
-    width: wWidth*0.55
+  image: {
+      backgroundColor: '#C391BE',
+      borderRadius: 3,
+      flex: 1,
+      height: ((wWidth*0.75)*0.25)*1.2,
+      marginBottom: 10,
+      marginLeft: 4,
+      marginRight: 0,
+      width: (wWidth*0.75)*0.17
   },
   list: {
       flexDirection: 'row',
       flexWrap: 'wrap',
       alignItems: 'flex-start'
+  },
+  scrollView: {
+    height: wHeight*0.9,
+    width: wWidth*0.55
   }
 });

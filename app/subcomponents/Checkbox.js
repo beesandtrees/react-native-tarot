@@ -15,6 +15,7 @@ export default class Checkbox extends Component {
 
       this.state = {
           styles : [globalStyles.whiteText, globalStyles.labelText],
+          checkStyles: [],
           checkedStyles : [globalStyles.check]
       }
       if(this.props.small) {
@@ -52,24 +53,28 @@ export default class Checkbox extends Component {
     if(this.props.InfoAction) {
       return (
         <View style={[globalStyles.checkbox]}>
-            <TouchableHighlight underlayColor="transparent" onPress={this.props.MainAction} style={[globalStyles.label]}>
-              <View>
-                <View style={this.state.checkStyles}></View>
-                <Text style={this.state.styles}>{this.props.labelText}</Text>
+            <View style={[globalStyles.label]}>
+              <Text onPress={this.props.MainAction} style={this.state.checkStyles}></Text>
+              <View style={globalStyles.labelText}>
+                <Text style={[globalStyles.whiteText, styles.labelText]} onPress={this.props.MainAction}>{this.props.labelText}</Text>
               </View>
-            </TouchableHighlight>
-            <TouchableHighlight style={globalStyles.info} onPress={this.props.InfoAction} underlayColor="transparent">
-                <Image style={globalStyles.infobtn} source={require('../images/misc/info-btn.png')} />
-            </TouchableHighlight>
+              <View style={globalStyles.info}>
+                  <Text onPress={this.props.InfoAction}>
+                    <Image style={globalStyles.infobtn} source={require('../images/misc/info-btn.png')} />
+                  </Text>
+              </View>
+            </View>
         </View>
       )
     } else {
       return (
         <View style={[globalStyles.checkbox]}>
-            <TouchableHighlight underlayColor="transparent" onPress={this.props.MainAction} style={[globalStyles.label]}>
-              <View>
+            <TouchableHighlight underlayColor="transparent" onPress={this.props.MainAction}>
+              <View style={[globalStyles.label]}>
                 <View style={this.state.checkStyles}></View>
-                <Text style={this.state.styles}>{this.props.labelText}</Text>
+                <View style={globalStyles.labelText}>
+                  <Text style={[globalStyles.whiteText, styles.labelText]}>{this.props.labelText}</Text>
+                </View>
               </View>
             </TouchableHighlight>
         </View>
@@ -82,6 +87,10 @@ const styles = StyleSheet.create({
   smallLabel: {
     fontSize: 18,
     marginTop: 4
+  },
+  labelText: {
+      marginTop: 3,
+      fontSize: 18,
   },
   red : {
     backgroundColor: '#D52B08'
@@ -98,5 +107,4 @@ const styles = StyleSheet.create({
   yellow: {
     backgroundColor: '#B99A10'
   }
-
 });

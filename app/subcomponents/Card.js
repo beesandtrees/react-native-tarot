@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Navigator, StyleSheet, TouchableHighlight, View} from 'react-native';
+import {Navigator, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import CardDetail from '../containers/CardDetail';
 
@@ -12,6 +12,7 @@ export default class Card extends Component {
         super(props);
 
         this.state = {
+            flipped: this.props.flipped,
             position: []
         }
 
@@ -55,6 +56,9 @@ export default class Card extends Component {
 
     }
     LoadDetail() {
+      if(this.state.flipped) {
+        this.setState({"flipped": false});
+      } else {
         this.props.navigator.push({
             component: CardDetail,
             passProps: {
@@ -64,15 +68,19 @@ export default class Card extends Component {
                 position: this.props.position
             }
         });
+      }
+        // setTimeout(function() {
+
+        // }.bind(this), 1000);
     }
     render() {
-        // must pass in layout so we can pass the size of the card
+        // if flipped show card else show back
         return (
-            <TouchableHighlight style={this.state.position} onPress={this.LoadDetail.bind(this)} underlayColor="transparent">
+            <TouchableOpacity style={this.state.position} onPress={this.LoadDetail.bind(this)} underlayColor="transparent">
                 <View>
-                    <CardImage layout={this.props.layout} deck={this.props.deck} reversed={this.props.reversed} value={this.props.value}/>
+                    <CardImage layout={this.props.layout} deck={this.props.deck} reversed={this.props.reversed} value={this.props.value} flipped={this.state.flipped} />
                 </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
         )
     }
 }
@@ -83,48 +91,49 @@ const styles = StyleSheet.create({
       position: 'absolute',
       top: 0,
       height: 100,
-      width: 52      
+      width: 52
     },
     image0: {
-      left: 105,
-      top: 110
+      left: 128,
+      top: 220
     },
     image1: {
-      left: 180,
-      top: 130,
+      left: 130,
+      top: 215,
       transform: [{ rotate: '90deg'}],
       zIndex: 2
     },
     image2: {
-      left: 105,
-      top: 220
+      left: 128,
+      top: 340
     },
     image3: {
-      left: 0,
-      top: 110
+      left: 40,
+      top: 220
     },
     image4: {
-      left: 105,
-      top: 0
+      left: 128,
+      top: 100
     },
     image5: {
       left: 210,
-      top: 110
+      top: 220
     },
+    // STAFF
     image6: {
       left: 280,
-      top: 0
+      top: 40
     },
     image7: {
-      left: 320,
-      top: 75
+      left: 280,
+      top: 160
     },
     image8: {
-      left: 360,
-      top: 150
+      left: 280,
+      top: 280
     },
     image9: {
-      left: 400,
-      top: 220
+      left: 280,
+      top: 400
     }
 });

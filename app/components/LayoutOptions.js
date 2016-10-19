@@ -41,6 +41,18 @@ class LayoutView extends Component {
               <Image style={styles.cardPPF} source={require('../images/layouts/PPF.png')} />
             </View>
           )
+        case '5card' :
+          return (
+            <View style={[globalStyles.choices, styles.choices]}>
+              <Image style={styles.card5} source={require('../images/layouts/5card.png')} />
+            </View>
+          )
+        case '4card' :
+          return (
+            <View style={[globalStyles.choices, styles.choices]}>
+              <Image style={styles.card4} source={require('../images/layouts/4card.png')} />
+            </View>
+          )
         default:
           return (
             <View style={[globalStyles.choices, styles.choices]}>
@@ -54,6 +66,7 @@ class LayoutView extends Component {
 export default class LayoutOptions extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
           defaultSet : false
         }
@@ -61,34 +74,28 @@ export default class LayoutOptions extends Component {
     GoBack() {
       this.props.navigator.pop();
     }
-    SetAsDefault(deck) {
-        let isSet = !this.state.defaultSet;
-        this.setState({'defaultSet' : isSet});
-        // TODO -- need to add this to redux state
-        // AsyncStorage.setItem('DefaultDeck', deck);
-    }
     render() {
         return (
             <View style={[globalStyles.fullView, styles.board]}>
               <StatusBar hidden={true} />
               <View style={[globalStyles.board, styles.board]}>
-                <Text style={[globalStyles.heading, styles.heading]}>Choose a Layout</Text>
+                <Text style={[globalStyles.heading, styles.heading]}>Choose a Spread</Text>
                 <ScrollView
                   automaticallyAdjustContentInsets={false}
                   scrollEventThrottle={200}
                   showsVerticalScrollIndicator={true}
                   style={styles.scrollView}>
-
-                    <Checkbox MainAction={this.props.chooseLayout.bind(null, 'Basic')} labelText="Basic" checked={this.props.layout === 'Basic'} color="blue" />
-
-                    <Checkbox MainAction={this.props.chooseLayout.bind(null, 'Celtic-Cross')} labelText="Celtic Cross" checked={this.props.layout === 'Celtic-Cross'} color="blue" />
+                    <Checkbox MainAction={this.props.chooseLayout.bind(null, 'Single')} labelText="Single Card" checked={this.props.layout === 'Single'} color="blue" />
 
                     <Checkbox MainAction={this.props.chooseLayout.bind(null, 'Past-Present-Future')} labelText="Past Present Future" checked={this.props.layout === 'Past-Present-Future'} color="blue" />
 
-                    <Checkbox MainAction={this.props.chooseLayout.bind(null, 'Single')} labelText="Single Card" checked={this.props.layout === 'Single'} color="blue" />
+                    <Checkbox MainAction={this.props.chooseLayout.bind(null, '4card')} labelText="4 Card" checked={this.props.layout === '4card'} color="blue" />
+
+                    <Checkbox MainAction={this.props.chooseLayout.bind(null, '5card')} labelText="5 Card" checked={this.props.layout === '5card'} color="blue" />
+
+                    <Checkbox MainAction={this.props.chooseLayout.bind(null, 'Celtic-Cross')} labelText="Celtic Cross" checked={this.props.layout === 'Celtic-Cross'} color="blue" />
                 </ScrollView>
                 <View style={[globalStyles.hr]}></View>
-                <Checkbox MainAction={() => this.SetAsDefault('Basic')} labelText="Set as Default" checked={this.state.defaultSet} color="blue" />
                 <Button press={() => this.GoBack()} buttonText="Save Selection" color="blue" />
               </View>
               <LayoutView layout={this.props.layout} />
@@ -123,6 +130,18 @@ const styles = StyleSheet.create({
   },
   cardPPF: {
     height: wHeight*0.25,
+    marginLeft: 10,
+    marginTop: wHeight*0.25,
+    width: (wWidth*0.4)*0.75
+  },
+  card4: {
+    height: wHeight*0.2,
+    marginLeft: 10,
+    marginTop: wHeight*0.25,
+    width: (wWidth*0.4)*0.75
+  },
+  card5: {
+    height: wHeight*0.15,
     marginLeft: 10,
     marginTop: wHeight*0.25,
     width: (wWidth*0.4)*0.75

@@ -145,6 +145,7 @@ export default class CardDetail extends Component {
 const styles = StyleSheet.create({
     noteBoard: {
       backgroundColor: '#FFEB92',
+      alignItems: "flex-start"
     },
     noteChoices: {
       backgroundColor: '#B99A10',

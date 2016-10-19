@@ -31,7 +31,8 @@ export default class Card extends Component {
     this.props.value.image : this.props.value.suit + this.props.value.id;
 
     this.state = {
-      image : ImageSet[cardSearch],
+      imageFace : ImageSet[cardSearch],
+      image: require('../images/misc/Rider-Waite-Back.LG.png'),
       cardStyles : [styles.image]
     };
 
@@ -47,6 +48,16 @@ export default class Card extends Component {
     }
     if(this.props.layout === 'Celtic-Cross') {
         this.state.cardStyles.push([styles.imageSM, styles.imageAbsolute])
+    }
+
+    if(!this.props.flipped) {
+      this.state.image = this.state.imageFace;
+    }
+
+  }
+  componentWillReceiveProps() {
+    if(this.props.flipped) {
+      this.setState({"image": this.state.imageFace});
     }
   }
   render() {

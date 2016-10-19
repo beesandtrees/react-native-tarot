@@ -50,6 +50,9 @@ class DeckCard extends Component {
 export default class ChooseDeck extends Component {
     constructor(props) {
         super(props);
+
+        console.log(this.props.deck);
+
         this.state = {
           defaultSet : false
         }
@@ -70,7 +73,7 @@ export default class ChooseDeck extends Component {
         let isSet = !this.state.defaultSet;
         this.setState({'defaultSet' : isSet});
         // TODO -- need to add this to redux state
-        // AsyncStorage.setItem('DefaultDeck', deck);
+        // AsyncStorage.setItem('deckDefault', deck);
     }
     render() {
         return (
@@ -83,11 +86,10 @@ export default class ChooseDeck extends Component {
                   scrollEventThrottle={200}
                   showsVerticalScrollIndicator={true}
                   style={styles.scrollView}>
-                    <Checkbox MainAction={this.props.chooseDeck.bind(null, 'Rider-Waite')} InfoAction={this.LoadDetails.bind(this,'Rider-Waite')} labelText="Rider-Waite - 1910" checked={this.props.deck === 'Rider-Waite'} />
-                    <Checkbox MainAction={this.props.chooseDeck.bind(null, 'Jean-Dodal')} InfoAction={this.LoadDetails.bind(this, 'Jean-Dodal')} labelText="Jean Dodal - 1715" checked={this.props.deck === 'Jean-Dodal'} />
+                    <Checkbox MainAction={this.props.chooseDeck.bind(null, 'Rider-Waite')} InfoAction={this.LoadDetails.bind(this,'Rider-Waite')} labelText="Waite-Colman Smith" checked={this.props.deck === 'Rider-Waite'} />
+                    <Checkbox MainAction={this.props.chooseDeck.bind(null, 'Jean-Dodal')} InfoAction={this.LoadDetails.bind(this, 'Jean-Dodal')} labelText="Jean Dodal" checked={this.props.deck === 'Jean-Dodal'} />
                 </ScrollView>
                 <View style={[globalStyles.hr]}></View>
-                <Checkbox MainAction={() => this.SetAsDefault('Rider-Waite')} labelText="Set as Default" checked={this.state.defaultSet} />
                 <Button press={() => this.GoBack()} buttonText="Save Selection" />
               </View>
               <DeckCard deck={this.props.deck} />
