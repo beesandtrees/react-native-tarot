@@ -18,7 +18,7 @@ export default globalStyles = StyleSheet.create({
     board: {
         alignItems: 'center',
         justifyContent: 'center',
-        alignSelf: 'flex-start',
+        alignSelf: 'center',
         flex: -1,
         marginRight: wWidth*0.025,
         padding: 20,
@@ -26,7 +26,8 @@ export default globalStyles = StyleSheet.create({
         width: wWidth*0.6
     },
     choices: {
-        alignSelf: 'flex-end',
+        alignSelf: 'center',
+        justifyContent: 'center',
         flex: -1,
         height: wHeight,
         padding: 20,
@@ -37,7 +38,7 @@ export default globalStyles = StyleSheet.create({
         color: 'white',
         fontSize: 36,
         fontWeight: '300',
-        marginBottom: 24
+        marginBottom: 10
     },
     subHeading: {
         fontSize: 20,
@@ -86,21 +87,21 @@ export default globalStyles = StyleSheet.create({
       width: 30
     },
     buttons: {
-        alignSelf: 'stretch',
+      alignSelf: 'stretch',
     },
     buttonText: {
-        alignSelf: 'stretch',
-        borderColor: 'white',
-        borderRadius: 8,
-        borderWidth: 2,
-        color: '#ffffff',
-        flex: 1,
-        fontSize: 18,
-        marginBottom: 20,
-        overflow: 'hidden',
-        padding: 6,
-        textAlign: 'center',
-        width: (wWidth*0.6)*0.6
+      alignSelf: 'stretch',
+      borderColor: 'white',
+      borderRadius: 8,
+      borderWidth: 2,
+      color: '#ffffff',
+      flex: 1,
+      fontSize: 18,
+      marginBottom: 20,
+      overflow: 'hidden',
+      padding: 6,
+      textAlign: 'center',
+      width: (wWidth*0.6)*0.6
     },
     buttonChoices: {
       marginTop: 10,

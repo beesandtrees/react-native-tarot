@@ -33,8 +33,8 @@ export default class ViewDeck extends Component {
             deckDescription = "Marseilles style deck from Lyon circa 1701.";
             break;
           default:
-            deckName = "Rider-Waite";
-            deckDescription = "Illustrated by Patricia Coleman Smith in 1910, the Rider-Waite deck is incredibly popular.";
+            deckName = "Basic";
+            deckDescription = "Illustrated by Patricia Coleman Smith in 1910, the Basic deck is incredibly popular.";
         }
 
         this.state = {
@@ -55,7 +55,7 @@ export default class ViewDeck extends Component {
       var images = [];
       for (var i = 0; i < 12; i++) {
         images.push(
-          <Image key={i} source={require('../images/misc/Rider-Waite-Back.png')} style={styles.image} />
+          <Image key={i} source={require('../images/misc/Basic-Back.png')} style={styles.image} />
         );
       }
       return images;

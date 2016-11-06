@@ -1,8 +1,8 @@
 import * as types from '../actions/actionTypes';
 
 const initialState = {
-  deck: 'Rider-Waite',
-  layout: 'Past-Present-Future',
+  deck: 'Basic',
+  spread: 'Past-Present-Future',
   reversed: false
 };
 
@@ -14,10 +14,10 @@ export default function createDeck(state = initialState, action = {}) {
         ...state,
         deck: action.deck
       };
-    case types.LAYOUT:
+    case types.SPREAD:
       return {
         ...state,
-        layout: action.layout
+        spread: action.spread
       };
     case types.REVERSED:
       return {
@@ -27,8 +27,8 @@ export default function createDeck(state = initialState, action = {}) {
     case types.TODAY:
       return {
         ...state,
-        deck: 'Rider-Waite',
-        layout: 'Single'
+        deck: 'Basic',
+        spread: 'Single'
       };
     default:
       return state;

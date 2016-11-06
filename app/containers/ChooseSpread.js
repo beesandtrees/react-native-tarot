@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 
 import { StatusBar, View } from 'react-native';
 
-import LayoutOptions from '../components/LayoutOptions';
+import SpreadOptions from '../components/SpreadOptions';
 
-class ChooseLayout extends Component {
+class ChooseSpread extends Component {
     constructor(props) {
         super(props);
     }
@@ -16,8 +16,8 @@ class ChooseLayout extends Component {
         return (
             <View>
                 <StatusBar hidden={true}/>
-                <LayoutOptions navigator={this.props.navigator}
-                  {...actions} layout={state.layout} />
+                <SpreadOptions navigator={this.props.navigator}
+                  {...actions} spread={state.spread} />
             </View>
         );
     }
@@ -25,4 +25,4 @@ class ChooseLayout extends Component {
 
 export default connect(state => ({state: state.createDeck}), (dispatch) => ({
     actions: bindActionCreators(deckActions, dispatch)
-}))(ChooseLayout);
+}))(ChooseSpread);

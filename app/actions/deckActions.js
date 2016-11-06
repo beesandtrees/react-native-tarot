@@ -1,9 +1,9 @@
 import * as types from './actionTypes';
 
-export function chooseLayout(layout) {
+export function chooseSpread(spread) {
   return {
-    type: types.LAYOUT,
-    layout
+    type: types.SPREAD,
+    spread
   };
 }
 

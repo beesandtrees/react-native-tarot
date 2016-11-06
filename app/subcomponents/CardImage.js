@@ -32,7 +32,7 @@ export default class Card extends Component {
 
     this.state = {
       imageFace : ImageSet[cardSearch],
-      image: require('../images/misc/Rider-Waite-Back.LG.png'),
+      image: require('../images/misc/Basic-Back.LG.png'),
       cardStyles : [styles.image]
     };
 
@@ -43,11 +43,15 @@ export default class Card extends Component {
     if(this.props.size === 'large') {
         this.state.cardStyles.push(styles.imageLG)
     }
-    if(this.props.layout === 'Past-Present-Future') {
+    if(this.props.spread === 'Past-Present-Future') {
         this.state.cardStyles.push(styles.imageMD)
     }
-    if(this.props.layout === 'Celtic-Cross') {
+    if(this.props.spread === 'Celtic-Cross') {
         this.state.cardStyles.push([styles.imageSM, styles.imageAbsolute])
+    }
+
+    if(this.props.spread === undefined) {
+      this.state.cardStyles.push(styles.addMargin)
     }
 
     if(!this.props.flipped) {
@@ -72,9 +76,7 @@ const styles = StyleSheet.create({
       borderRadius: 3,
       flex: 1,
       height: ((wWidth*0.75)*0.25)*1.2,
-      marginBottom: 10,
-      marginLeft: 4,
-      marginRight: 0,
+      margin: 0,
       width: (wWidth*0.75)*0.17
   },
   imageSM: {
@@ -85,15 +87,18 @@ const styles = StyleSheet.create({
   imageMD: {
     borderRadius: 6,
     height: (wWidth*0.22)*1.8,
-    marginTop: 20,
-    marginRight: 20,
     width: (wWidth*0.22)
   },
   imageLG: {
-      borderRadius: 6,
-      height: ((wHeight/360)-0.15)*360,
-      margin: 3,
-      width: (((wWidth*0.27)/210))*210
+    borderRadius: 6,
+    height: ((wHeight/360)-0.15)*360,
+    margin: 3,
+    width: (((wWidth*0.27)/210))*210
+  },
+  addMargin: {
+    marginBottom: 10,
+    marginLeft: 4,
+    marginRight: 0
   },
   imageReverse: {
       transform: [{ rotate: '180deg'}]

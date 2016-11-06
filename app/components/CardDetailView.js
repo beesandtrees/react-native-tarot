@@ -152,7 +152,8 @@ const styles = StyleSheet.create({
       alignItems: 'center'
     },
     hr: {
-      backgroundColor: '#4D4A4F',
+      backgroundColor: '#B99A10',
+      marginBottom: 0
     },
     heading: {
       color: '#4D4A4F',
@@ -167,14 +168,15 @@ const styles = StyleSheet.create({
     imageHolder: {
       backgroundColor: 'white',
       borderRadius: 6,
-      height: ((wHeight/366)-0.13)*366,
+      height: (((wHeight/366)-0.13)*366),
       width: (((wWidth*0.28)/216))*216
     },
     imageReverse: {
       transform: [{ rotate: '180deg'}]
     },
     scrollView: {
-      height: wHeight*0.3,
+      height: (wHeight*0.3875)+20,
+      paddingTop: 20,
       width: 300
     },
     description: {

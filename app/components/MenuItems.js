@@ -17,7 +17,7 @@ let wHeight = Dimensions.get('window').height;
 import Board from '../containers/Board';
 import CardDetail from '../containers/CardDetail';
 import ChooseDeck from '../containers/ChooseDeck';
-import ChooseLayout from '../containers/ChooseLayout';
+import ChooseSpread from '../containers/ChooseSpread';
 
 import Button from '../subcomponents/Button';
 import Checkbox from '../subcomponents/Checkbox';
@@ -37,7 +37,7 @@ export default class MenuItems extends Component {
         return card;
     }
     LoadBoard(today) {
-        if(today || this.props.layout === "Single") {
+        if(today || this.props.spread === "Single") {
           if(today) {
             this.props.todaysCard();
           }
@@ -61,49 +61,49 @@ export default class MenuItems extends Component {
     LoadChooseDeck() {
         this.props.navigator.push({component: ChooseDeck});
     }
-    LoadChooseLayout() {
-        this.props.navigator.push({component: ChooseLayout});
+    LoadChooseSpread() {
+        this.props.navigator.push({component: ChooseSpread});
     }
     OpenInfoView() {
         this.props.navigator.push({component: HelpView});
     }
     render() {
-        const { deck, layout, reversed } = this.props;
+        const { deck, spread, reversed } = this.props;
 
         let possible = reversed ? 'Possible' : 'None';
 
-        var spread = "Basic";
-        var deckClean = "Rider Waite";
+        var ChosenSpread = "Basic";
+        var deckClean = "Basic";
 
         switch(this.props.deck) {
-          case 'Rider-Waite':
-            deckClean = "Waite-Colman Smith";
+          case 'Basic':
+            deckClean = "Basic Deck";
             break;
           case 'Jean-Dodal':
             deckClean = "Jean Dodal";
             break;
           default:
-            deckClean = "Waite-Colman Smith";
+            deckClean = "Basic Deck";
         }
 
-        switch(this.props.layout) {
+        switch(this.props.spread) {
           case 'Celtic-Cross':
-            spread = "Celtic Cross";
+            ChosenSpread = "Celtic Cross";
             break;
           case '5card':
-            spread = "5 Card";
+            ChosenSpread = "5 Card";
             break;
           case '4card':
-            spread = "4 Card";
+            ChosenSpread = "4 Card";
             break;
           case 'Past-Present-Future':
-            spread = "Past Present Future";
+            ChosenSpread = "Past Present Future";
             break;
           case 'Single':
-            spread = "Single";
+            ChosenSpread = "Single";
             break;
           default:
-            spread = "Past Present Future";
+            ChosenSpread = "Past Present Future";
         }
 
         return (
@@ -114,20 +114,22 @@ export default class MenuItems extends Component {
                     <Button press={() => this.LoadBoard(true)} buttonText="Draw a Card" color="purple" />
                     <View style={[globalStyles.hr]}></View>
                     <Button press={() => this.LoadChooseDeck()} buttonText="Choose a Deck" color="purple" />
-                    <Button press={() => this.LoadChooseLayout()} buttonText="Choose a Spread" color="purple" />
+                    <Button press={() => this.LoadChooseSpread()} buttonText="Choose a Spread" color="purple" />
                     <View style={globalStyles.buttonIndent}>
                       <Checkbox MainAction={this.props.switchReversed.bind(null, !reversed)} small={true} labelText="Include Reversed Cards" color="purple" checked={reversed} />
                     </View>
                 </View>
                 <View style={[globalStyles.choices, styles.choices]}>
-                    <Text style={globalStyles.heading}>Options</Text>
-                    <Text style={[globalStyles.whiteText, globalStyles.subHeading]}>Deck</Text>
-                    <Text style={[globalStyles.whiteText, globalStyles.choiceText]}>{deckClean}</Text>
-                    <Text style={[globalStyles.whiteText, globalStyles.subHeading]}>Layout</Text>
-                    <Text style={[globalStyles.whiteText, globalStyles.choiceText]}>{spread}</Text>
-                    <Text style={[globalStyles.whiteText, globalStyles.subHeading]}>Reversed Cards?</Text>
-                    <Text style={[globalStyles.whiteText, globalStyles.choiceText]}>{possible}</Text>
-                    <Button press={() => this.LoadBoard()} buttonText="Begin Reading" smaller={true} color="purple" />
+                    <View style={[styles.transparent]}>
+                        <Text style={globalStyles.heading}>Options</Text>
+                        <Text style={[globalStyles.whiteText, globalStyles.subHeading]}>Deck</Text>
+                        <Text style={[globalStyles.whiteText, globalStyles.choiceText]}>{deckClean}</Text>
+                        <Text style={[globalStyles.whiteText, globalStyles.subHeading]}>Spread</Text>
+                        <Text style={[globalStyles.whiteText, globalStyles.choiceText]}>{ChosenSpread}</Text>
+                        <Text style={[globalStyles.whiteText, globalStyles.subHeading]}>Reversed Cards?</Text>
+                        <Text style={[globalStyles.whiteText, globalStyles.choiceText]}>{possible}</Text>
+                        <Button press={() => this.LoadBoard()} buttonText="Begin Reading" smaller={true} color="purple" />
+                    </View>
                 </View>
             </View>
         );
@@ -139,7 +141,13 @@ const styles = StyleSheet.create({
       backgroundColor: '#AB76A4',
     },
     choices: {
-      backgroundColor: '#73436E',
+      backgroundColor: '#73436E'
+    },
+    red: {
+      backgroundColor: '#FF3300'
+    },
+    transparent: {
+        backgroundColor: 'transparent'
     },
     label: {
         top: 3

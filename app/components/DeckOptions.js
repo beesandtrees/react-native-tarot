@@ -25,10 +25,10 @@ import Checkbox from '../subcomponents/Checkbox';
 class DeckCard extends Component {
   render() {
       switch (this.props.deck) {
-        case 'Rider-Waite' :
+        case 'Basic' :
           return (
             <View style={[globalStyles.choices, styles.choices]}>
-                <Image style={styles.card} source={require('../images/Rider/MajorArcana/Fool.jpg')} />
+                <Image style={styles.card} source={require('../images/Basic/MajorArcana/Fool.jpg')} />
             </View>
           )
         case 'Jean-Dodal' :
@@ -40,7 +40,7 @@ class DeckCard extends Component {
         default:
           return (
             <View style={[globalStyles.choices, styles.choices]}>
-                <Image style={styles.card} source={require('../images/Rider/MajorArcana/Fool.jpg')} />
+                <Image style={styles.card} source={require('../images/Basic/MajorArcana/Fool.jpg')} />
             </View>
           )
       }
@@ -50,8 +50,6 @@ class DeckCard extends Component {
 export default class ChooseDeck extends Component {
     constructor(props) {
         super(props);
-
-        console.log(this.props.deck);
 
         this.state = {
           defaultSet : false
@@ -86,7 +84,7 @@ export default class ChooseDeck extends Component {
                   scrollEventThrottle={200}
                   showsVerticalScrollIndicator={true}
                   style={styles.scrollView}>
-                    <Checkbox MainAction={this.props.chooseDeck.bind(null, 'Rider-Waite')} InfoAction={this.LoadDetails.bind(this,'Rider-Waite')} labelText="Waite-Colman Smith" checked={this.props.deck === 'Rider-Waite'} />
+                    <Checkbox MainAction={this.props.chooseDeck.bind(null, 'Basic')} InfoAction={this.LoadDetails.bind(this,'Basic')} labelText="Basic Deck" checked={this.props.deck === 'Basic'} />
                     <Checkbox MainAction={this.props.chooseDeck.bind(null, 'Jean-Dodal')} InfoAction={this.LoadDetails.bind(this, 'Jean-Dodal')} labelText="Jean Dodal" checked={this.props.deck === 'Jean-Dodal'} />
                 </ScrollView>
                 <View style={[globalStyles.hr]}></View>

@@ -16,8 +16,8 @@ export default class Card extends Component {
             position: []
         }
 
-        if (this.props.layout === 'Celtic-Cross') {
-            this.state.position.push(styles.imageAbsolute);
+        if (this.props.spread === 'Celtic-Cross') {
+            this.state.position.push([styles.imageAbsolute, styles.imageBorder]);
             switch (this.props.index) {
                 case 0:
                     this.state.position.push(styles.image0);
@@ -54,6 +54,14 @@ export default class Card extends Component {
             }
         }
 
+        if (this.props.spread === 'Single') {
+          this.state.position.push(styles.imageBorder);
+        }
+
+        if (this.props.spread === 'Past-Present-Future' || this.props.spread === '4card' || this.props.spread === '5card') {
+          this.state.position.push([styles.imageBorder, styles.biggerRadius]);
+        }
+
     }
     LoadDetail() {
       if(this.state.flipped) {
@@ -69,16 +77,13 @@ export default class Card extends Component {
             }
         });
       }
-        // setTimeout(function() {
-
-        // }.bind(this), 1000);
     }
     render() {
         // if flipped show card else show back
         return (
             <TouchableOpacity style={this.state.position} onPress={this.LoadDetail.bind(this)} underlayColor="transparent">
                 <View>
-                    <CardImage layout={this.props.layout} deck={this.props.deck} reversed={this.props.reversed} value={this.props.value} flipped={this.state.flipped} />
+                    <CardImage spread={this.props.spread} deck={this.props.deck} reversed={this.props.reversed} value={this.props.value} flipped={this.state.flipped} />
                 </View>
             </TouchableOpacity>
         )
@@ -86,19 +91,29 @@ export default class Card extends Component {
 }
 
 const styles = StyleSheet.create({
+    imageBorder: {
+      borderColor: '#ffffff',
+      borderRadius: 3,
+      borderWidth: 2,
+      marginBottom: 10
+    },
+    biggerRadius: {
+      borderRadius: 6,
+      borderWidth: 3,
+    },
     imageAbsolute: {
       left: 0,
       position: 'absolute',
       top: 0,
-      height: 100,
-      width: 52
+      height: 104,
+      width: 56
     },
     image0: {
       left: 128,
       top: 220
     },
     image1: {
-      left: 130,
+      left: 125,
       top: 215,
       transform: [{ rotate: '90deg'}],
       zIndex: 2

@@ -16,13 +16,13 @@ import Card from '../subcomponents/Card';
 import CloseButton from '../subcomponents/CloseButton';
 
 import Cards from '../helpers/cards.json';
-import Layout from '../helpers/layout.json';
+import Spread from '../helpers/spread.json';
 
 import globalStyles from '../helpers/globalStyles.js';
 
-class BoardLayout extends Component {
+class BoardSpread extends Component {
   render() {
-    if(this.props.layout === "Celtic-Cross") {
+    if(this.props.spread === "Celtic-Cross") {
       return(
         <View style={styles.boardRelative}>
           <Text style={styles.rightText}>Tap card to see face. Tap again to see details.</Text>
@@ -49,7 +49,7 @@ export default class Board extends Component {
         var cardLength,
             reversed = this.props.reversed ? 0.1 : 0;
 
-        switch(this.props.layout) {
+        switch(this.props.spread) {
           case 'Basic':
             cardLength = 10;
             break;
@@ -109,9 +109,9 @@ export default class Board extends Component {
         // this is the number of cards to return
         let allCards = display;
 
-        // which layout
-        let layout = display > 3 ? 0 : 1;
-        if(display === 1) {layout = 2;}
+        // which spread
+        let spread = display > 3 ? 0 : 1;
+        if(display === 1) {spread = 2;}
 
         for (var i = 0; i < allCards; i++) {
 
@@ -123,10 +123,10 @@ export default class Board extends Component {
             // this is actually a double shuffle which maybe I shouldn't do?
             var card = cards.splice(random, 1)[0],
                 name = card.name,
-                position = Layout[layout][i];
+                position = Spread[spread][i];
 
             sections.push(
-                <Card key={i} index={i} key={name} value={card} reversed={reversed} position={position} layout={this.props.layout} deck={deck} navigator={this.props.navigator} flipped={true} />
+                <Card key={i} index={i} key={name} value={card} reversed={reversed} position={position} spread={this.props.spread} deck={deck} navigator={this.props.navigator} flipped={true} />
             );
         }
         return sections
@@ -135,8 +135,8 @@ export default class Board extends Component {
         return (
             <View style={[globalStyles.fullView, styles.fullView]}>
                 <StatusBar hidden={true} />
-                <BoardLayout layout={this.props.layout} cards={this.state.sections} />
-                <CloseButton GoBack={() => this.GoBack()} />
+                <BoardSpread spread={this.props.spread} cards={this.state.sections} />
+                <CloseButton white={true} GoBack={() => this.GoBack()} />
             </View>
         );
     }
@@ -144,7 +144,7 @@ export default class Board extends Component {
 
 const styles = StyleSheet.create({
   fullView: {
-     backgroundColor: '#ffffff',
+     backgroundColor: '#737822',
   },
   boardBasic: {
       alignSelf: 'flex-start',
@@ -164,12 +164,14 @@ const styles = StyleSheet.create({
       width: wHeight,
   },
   bottomText: {
+    color: '#FFFFFF',
     fontSize: 12,
     position: 'absolute',
     bottom: -15,
     left: 10
   },
   rightText: {
+    color: '#FFFFFF',
     fontSize: 12,
     position: 'absolute',
     top: 10,
