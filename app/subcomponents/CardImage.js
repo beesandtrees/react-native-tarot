@@ -36,6 +36,10 @@ export default class Card extends Component {
       cardStyles : [styles.image]
     };
 
+    if(this.props.deck === 'Jean-Dodal') {
+      this.state.image = require('../images/misc/Dodal-Back.LG.png');
+    }
+
     if(reversed) {
         this.state.cardStyles.push(styles.imageReverse)
     }
