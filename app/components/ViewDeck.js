@@ -30,15 +30,15 @@ export default class ViewDeck extends Component {
         switch(this.props.myDeck) {
           case 'Jean-Dodal':
             deckName = "Jean Dodal";
-            deckDescription = "Marseilles style deck from Lyon circa 1701.";
+            deckDescription = "Illustrated by Jean Dodal. This is a Marseilles style deck from Lyon circa 1701.";
             break;
           default:
             deckName = "Basic";
-            deckDescription = "Illustrated by Patricia Coleman Smith in 1910, the Basic deck is incredibly popular.";
+            deckDescription = "Illustrated by Melissa McMurtrie. This is a combination of a modern style deck with Minor Arcana based on Marseilles style.";
         }
 
         this.state = {
-            images: this.renderPlaceholders(),
+            images: this.renderPlaceholders(this.props.myDeck),
             deckName : deckName,
             deckDescription: deckDescription
         };
@@ -51,12 +51,18 @@ export default class ViewDeck extends Component {
     GoBack() {
       this.props.navigator.pop();
     }
-    renderPlaceholders() {
+    renderPlaceholders(currentDeck) {
       var images = [];
       for (var i = 0; i < 12; i++) {
-        images.push(
-          <Image key={i} source={require('../images/misc/Basic-Back.png')} style={styles.image} />
-        );
+        if(currentDeck === 'Basic') {
+          images.push(
+            <Image key={i} source={require('../images/misc/Basic-Back.png')} style={styles.image} />
+          );
+        } else {
+          images.push(
+            <Image key={i} source={require('../images/misc/Dodal-Back.png')} style={styles.image} />
+          );
+        }
       }
       return images;
     }
