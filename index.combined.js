@@ -1,23 +1,23 @@
 import React, {Component} from 'react';
-import {Navigator} from 'react-native';
-import {createStore, applyMiddleware, combineReducers} from 'redux';
+import {AsyncStorage, Navigator} from 'react-native';
+import {createStore, compose, applyMiddleware, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
-import thunk from 'redux-thunk';
+import { persistStore, autoRehydrate } from 'redux-persist'
 
 import * as reducers from './app/reducers';
-import Options from './app/containers/Options.js';
+import Menu from './app/containers/Menu.js';
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const reducer = combineReducers(reducers);
-const store = createStoreWithMiddleware(reducer);
+const store = compose(autoRehydrate())(createStore)(reducer)
+persistStore(store, {storage: AsyncStorage})
 
 export default class MainView extends Component {
     render() {
         return (
             <Provider store={store}>
                 <Navigator initialRoute={{
-                    name: 'Options',
-                    component: Options
+                    name: 'Menu',
+                    component: Menu
                 }} configureScene={() => {
                     return Navigator.SceneConfigs.HorizontalSwipeJump;
                 }} renderScene={(route, navigator) => {

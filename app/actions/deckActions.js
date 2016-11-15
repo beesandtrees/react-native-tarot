@@ -1,19 +1,28 @@
 import * as types from './actionTypes';
 
-export function layout() {
+export function chooseSpread(spread) {
   return {
-    type: types.LAYOUT
+    type: types.SPREAD,
+    spread
   };
 }
 
-export function deck() {
+export function chooseDeck(deck) {
   return {
-    type: types.DECK
+    type: types.DECK,
+    deck
   };
 }
 
-export function reversed() {
+export function switchReversed(tf) {
   return {
-    type: types.REVERSED
+    type: types.REVERSED,
+    tf // true or false
+  };
+}
+
+export function todaysCard() {
+  return {
+    type: types.TODAY
   };
 }
