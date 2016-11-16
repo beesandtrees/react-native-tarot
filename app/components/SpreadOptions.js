@@ -106,13 +106,14 @@ export default class SpreadOptions extends Component {
 
 const styles = StyleSheet.create({
   board: {
-      backgroundColor: '#64A8C4',
+      backgroundColor: '#267FA3',
   },
   choices: {
-    backgroundColor: '#356D83',
+    backgroundColor: '#055575',
   },
   heading: {
-      marginBottom: 24
+    marginTop: 24,
+    width: 300
   },
   xButton: {
     color: 'white'

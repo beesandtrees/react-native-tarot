@@ -93,18 +93,18 @@ const styles = StyleSheet.create({
       fontSize: 18,
   },
   red : {
-    backgroundColor: '#D52B08'
+    backgroundColor: '#57190C'
   },
   green : {
-    backgroundColor: '#737822'
+    backgroundColor: '#595C21'
   },
   blue : {
-    backgroundColor: '#356D83'
+    backgroundColor: '#055575'
   },
   purple: {
-    backgroundColor: '#73436E'
+    backgroundColor: '#23256B'
   },
   yellow: {
-    backgroundColor: '#B99A10'
+    backgroundColor: '#B38900'
   }
 });

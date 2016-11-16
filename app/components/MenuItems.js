@@ -138,13 +138,10 @@ export default class MenuItems extends Component {
 
 const styles = StyleSheet.create({
     board: {
-      backgroundColor: '#AB76A4',
+      backgroundColor: '#3A4E91',
     },
     choices: {
-      backgroundColor: '#73436E'
-    },
-    red: {
-      backgroundColor: '#FF3300'
+      backgroundColor: '#23256B'
     },
     transparent: {
         backgroundColor: 'transparent'

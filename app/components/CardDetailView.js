@@ -28,11 +28,11 @@ class ToggleButton extends Component {
   render() {
     if(this.props.view === "detail") {
       return (
-        <Button press={this.props.detailAction} buttonText="Add a Note" smaller={true} color="yellow" />
+        <Button press={this.props.detailAction} buttonText="Add a Note" note={true} color="yellow" />
       )
     } else {
       return (
-        <Button press={this.props.noteAction} buttonText="Save Note" smaller={true} color="yellow" />
+        <Button press={this.props.noteAction} buttonText="Save Note" note={true} color="yellow" />
       )
     }
   }
@@ -144,20 +144,21 @@ export default class CardDetail extends Component {
 
 const styles = StyleSheet.create({
     noteBoard: {
-      backgroundColor: '#FFEB92',
+      backgroundColor: '#E3C336',
       alignItems: "flex-start"
     },
     noteChoices: {
-      backgroundColor: '#B99A10',
+      backgroundColor: '#B38900',
       alignItems: 'center'
     },
     hr: {
-      backgroundColor: '#B99A10',
+      backgroundColor: '#B38900',
       marginBottom: 0
     },
     heading: {
       color: '#4D4A4F',
-      fontSize: 24
+      fontSize: 24,
+      marginBottom: 12
     },
     subHeading: {
       color: '#4D4A4F',

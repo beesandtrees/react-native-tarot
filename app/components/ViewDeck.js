@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#FFFFFF',
   },
   choices: {
-    backgroundColor: '#73436E',
+    backgroundColor: '#23256B',
   },
   heading: {
       marginBottom: 24

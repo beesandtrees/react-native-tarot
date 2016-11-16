@@ -36,9 +36,9 @@ export default globalStyles = StyleSheet.create({
     },
     heading: {
         color: 'white',
-        fontSize: 36,
+        fontSize: 24,
         fontWeight: '300',
-        marginBottom: 10
+        marginBottom: 20
     },
     subHeading: {
         fontSize: 20,
@@ -72,19 +72,19 @@ export default globalStyles = StyleSheet.create({
     check: {
       borderColor: 'white',
       borderRadius: 12,
-      borderWidth: 2,
+      borderWidth: 1,
       height: 24,
       overflow: 'hidden',
       width: 24
     },
     info: {
       marginLeft: 20,
-      height: 30,
-      width: 30
+      height: 18,
+      width: 18
     },
     infobtn: {
-      height: 30,
-      width: 30
+      height: 18,
+      width: 18
     },
     buttons: {
       alignSelf: 'stretch',
@@ -93,10 +93,10 @@ export default globalStyles = StyleSheet.create({
       alignSelf: 'stretch',
       borderColor: 'white',
       borderRadius: 8,
-      borderWidth: 2,
+      borderWidth: 0,
       color: '#ffffff',
       flex: 1,
-      fontSize: 18,
+      fontSize: 16,
       marginBottom: 20,
       overflow: 'hidden',
       padding: 6,
@@ -104,6 +104,11 @@ export default globalStyles = StyleSheet.create({
       width: (wWidth*0.6)*0.6
     },
     buttonChoices: {
+      borderWidth: 1,
+      marginTop: 10,
+      width: (wWidth*0.4)*0.8
+    },
+    buttonNote: {
       marginTop: 10,
       width: (wWidth*0.4)*0.8
     },
@@ -112,7 +117,7 @@ export default globalStyles = StyleSheet.create({
     },
     buttonSmall: {
       alignSelf: 'flex-end',
-      fontSize: 20,
+      fontSize: 16,
       marginTop: 16,
       padding: 6,
       width: (wWidth*0.6)*0.5
@@ -130,7 +135,7 @@ export default globalStyles = StyleSheet.create({
     },
     hr: {
       backgroundColor: 'white',
-      height: 2,
+      height: 1,
       marginBottom: 20,
       width: 300
     },

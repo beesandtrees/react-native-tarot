@@ -144,7 +144,7 @@ export default class Board extends Component {
 
 const styles = StyleSheet.create({
   fullView: {
-     backgroundColor: '#737822',
+     backgroundColor: '#3F4F19',
   },
   boardBasic: {
       alignSelf: 'flex-start',

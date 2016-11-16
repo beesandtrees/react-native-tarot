@@ -99,13 +99,14 @@ export default class ChooseDeck extends Component {
 
 const styles = StyleSheet.create({
   board: {
-      backgroundColor: '#EB6B51',
+      backgroundColor: '#93210A',
   },
   choices: {
-    backgroundColor: '#D52B08',
+    backgroundColor: '#57190C',
   },
   heading: {
-      marginBottom: 24
+      marginTop: 24,
+      width: 300
   },
   card: {
     height: wHeight*0.9,
